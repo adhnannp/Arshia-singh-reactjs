@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OUR STORY | ARSHIA SINGH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="subpage story-page">
+
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img src="/assets/logo2.png" alt="Arshia Singh Logo" class="brand-logo">
+      </a>
+    </div>
+    <div class="nav-right">
+      <button class="menu-toggle">MENU</button>
+    </div>
+  </nav>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay">
+    <div class="menu-inner">
+      <ul>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="new.html">New</a></li>
+        <li><a href="story.html">Story</a></li>
+        <li><a href="custom.html">Custom</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- SUBPAGE HERO -->
+      <section class="subpage-hero">
+        <div class="subpage-hero-bg" style="background-image: url('/assets/12.jpg');"></div>
+        <div class="subpage-hero-content">
+          <span class="subpage-hero-subtitle fade-up">Our Heritage</span>
+          <h1 class="subpage-hero-title fade-up">The Narrative</h1>
+        </div>
+      </section>
+
+      <!-- EDITORIAL BLOCK 1 -->
+      <section class="editorial-block">
+        <h2 class="editorial-title fade-up">Craftsmanship Reimagined</h2>
+        <p class="editorial-text fade-up">
+          Arshia Singh was born from a desire to bridge the gap between traditional Indian craftsmanship and modern conscious living. Our story is not just about clothes; it's about the hands that make them, the heritage they carry, and the future we are building together.
+        </p>
+      </section>
+
+      <!-- STORY VISUALS -->
+      <section class="masterclass-grid" style="padding-top: 0;">
+        <div class="masterclass-item fade-up">
+          <img src="/assets/13.jpg" alt="Craft Detail" style="width: 100%; height: auto; display: block;">
+          <div style="margin-top: 20px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; opacity: 0.5;">Atelier // PHULKARI PROCESS</div>
+        </div>
+        <div class="masterclass-item fade-up" style="margin-top: 100px;">
+          <img src="/assets/14.jpg" alt="Craft Detail" style="width: 100%; height: auto; display: block;">
+          <div style="margin-top: 20px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; opacity: 0.5;">Material // VEGAN CONSCIOUS</div>
+        </div>
+      </section>
+
+      <!-- FOUNDER QUOTE REVISITED -->
+      <section class="editorial-block" style="background: var(--color-dark); color: var(--color-bg); margin-bottom: 15vh;">
+        <h2 class="editorial-title fade-up" style="color: var(--color-bg);">"Luxury is not about excess. It is about intention."</h2>
+        <p class="editorial-text fade-up" style="opacity: 0.6;">
+          — Arshia Singh, Founder
+        </p>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-main">
+          <h1 class="display footer-hero-text">WEAR<br>YOUR STORY</h1>
+        </div>
+        <div class="footer-bottom">
+          <p class="footer-copyright">© 2025 ARSHIA SINGH — CONSCIOUS LUXURY</p>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
