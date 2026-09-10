@@ -13,7 +13,7 @@ const MEN_HANDLES = ['natural-luxury', 'printed-stories', 'modern-classics'];
 
 const CONNECT_LINKS = [
   { label: 'Discover', href: '/discover', external: false },
-  { label: 'Blog', href: '/blog', external: false },
+  { label: 'Blog', href: '/blogs', external: false },
   { label: 'Our Story', href: '/story', external: false },
   { label: 'Get in touch', href: '/inquiries', external: false },
   { label: 'Instagram', href: 'https://www.instagram.com/arshia.singh.official?igsh=bWN5cXd1M2txNmsx', external: true },
@@ -105,7 +105,7 @@ export default function Navbar() {
         </div>
         <div className="nav-links">
           <Link href="/story" className="nav-link-item">Our Story</Link>
-          <Link href="/blog" className="nav-link-item">Blog</Link>
+          <Link href="/blogs" className="nav-link-item">Blog</Link>
           <Link href="/discover" className="nav-link-item">Discover</Link>
         </div>
         <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>

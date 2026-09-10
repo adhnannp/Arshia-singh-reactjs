@@ -13,10 +13,11 @@ const VEGAN_BGS = [
   "/assets/art_museum_5.jpg"
 ];
 
-// Helper to match home screen assets to their correct product page route
 const getLinkForImage = (src) => {
   if (src.includes('new_coll_1.jpg')) return '/products/rangrez-print-kaftan';
   if (src.includes('new_coll_2.png')) return '/products/ravel-print-dhoti-skirt-blazer-set';
+  if (src.includes('IMG-20260903-WA0000.webp')) return '/products/linen-short-dress';
+  if (src.includes('IMG-20260903-WA0002.webp')) return '/products/linen-shirt-skirt-se';
   if (src.includes('new_coll_3.png')) return '/products/raat-print-skirt-jacket-set';
   if (src.includes('new_coll_4.jpeg')) return '/products/pastel-embroidery-white-blazer-set';
   if (src.includes('new_coll_5.JPG')) return '/products/52-bagh-phulkari-blazer-set';
@@ -389,8 +390,8 @@ export default function HomePage() {
         <div className="collection-swipe-hint">SWIPE TO UNFOLD &gt;&gt;&gt;</div>
         <div className="editorial-grid">
           <div className="grid-item item-large" data-speed="0.9" data-index="01">
-            <Link href={getLinkForImage('/assets/new_coll_7.jpg')} className="grid-item-link">
-              <img src="/assets/new_coll_7.jpg" alt="Piece 1" loading="eager" />
+            <Link href={getLinkForImage('/assets/IMG-20260903-WA0002.webp')} className="grid-item-link">
+              <img src="/assets/IMG-20260903-WA0002.webp" alt="Piece 1" loading="eager" />
             </Link>
           </div>
           <div className="grid-item item-small offset-down" data-speed="1.1" data-index="02">
@@ -409,8 +410,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid-item item-wide" data-speed="0.8" data-index="05">
-            <Link href={getLinkForImage('/assets/new_coll_3.png')} className="grid-item-link">
-              <img src="/assets/new_coll_3.png" alt="Piece 5" loading="eager" />
+            <Link href={getLinkForImage('/assets/IMG-20260903-WA0000.webp')} className="grid-item-link">
+              <img src="/assets/IMG-20260903-WA0000.webp" alt="Piece 5" loading="eager" />
             </Link>
           </div>
         </div>
