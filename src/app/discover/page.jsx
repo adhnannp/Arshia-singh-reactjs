@@ -86,6 +86,7 @@ export default function DiscoverPage() {
 
   // Layout & Filter States
   const [layoutMode] = useState('studio'); // 'studio' (3-col)
+  const [mobileGrid, setMobileGrid] = useState('1col'); // mobile: '1col' | '2col'
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedGenders, setSelectedGenders] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -299,8 +300,8 @@ export default function DiscoverPage() {
       </section>
 
       {/* ─── SEARCH SECTION ─── */}
-      <section className="discover-search-section" style={{ padding: '0 6vw', background: '#fff', marginTop: '-30px', marginBottom: '30px' }}>
-        <div className="search-input-container" style={{ position: 'relative', maxWidth: '600px', margin: '0 auto', zIndex: 10 }}>
+      <section className="discover-search-section" style={{ padding: '0 clamp(16px, 5vw, 48px)', background: '#fff', marginTop: '-30px', marginBottom: '30px', boxSizing: 'border-box', width: '100%', overflowX: 'hidden' }}>
+        <div className="search-input-container" style={{ position: 'relative', maxWidth: '600px', margin: '0 auto', zIndex: 10, width: '100%', boxSizing: 'border-box' }}>
           <input
             type="text"
             placeholder="SEARCH SILHOUETTES, FABRICS, OR PRINTS..."
@@ -364,72 +365,106 @@ export default function DiscoverPage() {
 
       {/* ─── DYNAMIC UTILITY CONTROLS BAR ─── */}
       <div className="collection-controls-bar">
-        <div className="controls-left">
+        <div className="controls-top-row">
+
+          {/* LEFT: Filters button */}
           <button className="btn-filter-trigger" onClick={() => setIsFilterOpen(true)}>
             <span>Filters</span>
             {activeFiltersCount > 0 ? (
               <span className="filter-count">{activeFiltersCount}</span>
             ) : (
-              <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
                 <path d="M1 2.5H13M3.5 6H10.5M5.5 9.5H8.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
               </svg>
             )}
           </button>
 
-          {activeFiltersCount > 0 && (
-            <div className="active-filters-summary">
-              {searchInput && (
-                <div className="active-filter-pill">
-                  <span>Search: "{searchInput}"</span>
-                  <button onClick={() => setSearchInput('')}>×</button>
-                </div>
-              )}
-              {selectedGenders.map(g => (
-                <div key={g} className="active-filter-pill">
-                  <span>{g === 'women' ? 'Womens wear' : 'Mens wear'}</span>
-                  <button onClick={() => toggleFilter(selectedGenders, setSelectedGenders, g)}>×</button>
-                </div>
-              ))}
-              {selectedCategories.map(c => (
-                <div key={c} className="active-filter-pill">
-                  <span>{c}</span>
-                  <button onClick={() => toggleFilter(selectedCategories, setSelectedCategories, c)}>×</button>
-                </div>
-              ))}
-              {selectedFabrics.map(f => (
-                <div key={f} className="active-filter-pill">
-                  <span>{f}</span>
-                  <button onClick={() => toggleFilter(selectedFabrics, setSelectedFabrics, f)}>×</button>
-                </div>
-              ))}
-              {selectedComponents.map(c => (
-                <div key={c} className="active-filter-pill">
-                  <span>{c} Components</span>
-                  <button onClick={() => toggleFilter(selectedComponents, setSelectedComponents, c)}>×</button>
-                </div>
-              ))}
-              <button className="btn-clear-all" onClick={clearAllFilters}>Clear All</button>
+          {/* RIGHT: grid toggle + sort grouped */}
+          <div className="controls-right">
+
+            {/* Mobile-only grid view toggle */}
+            <div className="mobile-grid-toggle">
+              <button
+                className={`mobile-grid-btn${mobileGrid === '1col' ? ' active' : ''}`}
+                onClick={() => setMobileGrid('1col')}
+                aria-label="Single column view"
+              >
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="2" width="12" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="2" y="9" width="12" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
+              </button>
+              <button
+                className={`mobile-grid-btn${mobileGrid === '2col' ? ' active' : ''}`}
+                onClick={() => setMobileGrid('2col')}
+                aria-label="Two column grid view"
+              >
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
+              </button>
             </div>
-          )}
-        </div>
-        <div className="controls-right">
-          <div className="sort-select-wrapper">
-            <select
-              className="sort-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="default">Sort: Recommended</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="alphabetical">Alphabetical: A-Z</option>
-            </select>
+
+            <div className="controls-sep" />
+
+            <div className="sort-select-wrapper">
+              <select
+                className="sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="default">Featured</option>
+                <option value="price-low">Price ↑</option>
+                <option value="price-high">Price ↓</option>
+                <option value="alphabetical">A – Z</option>
+              </select>
+            </div>
           </div>
         </div>
+
+        {/* Active filter pills — below the top row */}
+        {activeFiltersCount > 0 && (
+          <div className="active-filters-summary">
+            {searchInput && (
+              <div className="active-filter-pill">
+                <span>Search: &quot;{searchInput}&quot;</span>
+                <button onClick={() => setSearchInput('')}>×</button>
+              </div>
+            )}
+            {selectedGenders.map(g => (
+              <div key={g} className="active-filter-pill">
+                <span>{g === 'women' ? 'Womens wear' : 'Mens wear'}</span>
+                <button onClick={() => toggleFilter(selectedGenders, setSelectedGenders, g)}>×</button>
+              </div>
+            ))}
+            {selectedCategories.map(c => (
+              <div key={c} className="active-filter-pill">
+                <span>{c}</span>
+                <button onClick={() => toggleFilter(selectedCategories, setSelectedCategories, c)}>×</button>
+              </div>
+            ))}
+            {selectedFabrics.map(f => (
+              <div key={f} className="active-filter-pill">
+                <span>{f}</span>
+                <button onClick={() => toggleFilter(selectedFabrics, setSelectedFabrics, f)}>×</button>
+              </div>
+            ))}
+            {selectedComponents.map(c => (
+              <div key={c} className="active-filter-pill">
+                <span>{c} Components</span>
+                <button onClick={() => toggleFilter(selectedComponents, setSelectedComponents, c)}>×</button>
+              </div>
+            ))}
+            <button className="btn-clear-all" onClick={clearAllFilters}>Clear All</button>
+          </div>
+        )}
       </div>
 
       {/* ─── PRODUCT GRID ─── */}
-      <section className={`collection-products-grid grid-${layoutMode}`}>
+      <section className={`collection-products-grid grid-${layoutMode}${mobileGrid === '2col' ? ' mobile-2col' : ''}`}>
         {loading ? (
           <div className="collection-loading-state" style={{ gridColumn: '1 / -1', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', padding: '100px 0', fontSize: '13px', color: '#666' }}>
             Searching Archive...
@@ -596,6 +631,98 @@ export default function DiscoverPage() {
         </div>
       </div>
 
+      <style>{`
+        /* ── Controls bar layout ── */
+        .collection-controls-bar {
+          width: 100%;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+        .controls-top-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          width: 100%;
+          box-sizing: border-box;
+          flex-wrap: nowrap;
+          overflow: hidden;
+        }
+        .controls-right {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          flex-shrink: 0;
+        }
+
+        /* ── Grid toggle buttons ── */
+        .mobile-grid-toggle {
+          display: none;
+          align-items: center;
+          gap: 3px;
+          flex-shrink: 0;
+        }
+        .mobile-grid-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border: 1px solid #d4d4d4;
+          background: transparent;
+          border-radius: 4px;
+          cursor: pointer;
+          color: #999;
+          transition: border-color 0.2s, color 0.2s, background 0.2s;
+          flex-shrink: 0;
+          padding: 0;
+        }
+        .mobile-grid-btn.active {
+          border-color: #1d1d1f;
+          color: #1d1d1f;
+          background: #f0f0f0;
+        }
+        .controls-sep {
+          display: none;
+          width: 1px;
+          height: 18px;
+          background: #d4d4d4;
+          flex-shrink: 0;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+          .mobile-grid-toggle { display: flex; }
+          .controls-sep { display: block; }
+          .collection-products-grid.mobile-2col {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: clamp(6px, 2vw, 12px) !important;
+          }
+          .collection-products-grid.mobile-2col .product-card-name {
+            font-size: clamp(0.72rem, 2.6vw, 0.88rem);
+            line-height: 1.3;
+          }
+          .collection-products-grid.mobile-2col .product-card-price {
+            font-size: clamp(0.7rem, 2.4vw, 0.85rem);
+            font-weight: 600;
+          }
+        }
+
+        /* ── Very small screens ── */
+        @media (max-width: 380px) {
+          .btn-filter-trigger {
+            padding: 7px 10px !important;
+            font-size: 10px !important;
+            gap: 5px !important;
+          }
+          .sort-select {
+            font-size: 10px !important;
+            padding: 7px 20px 7px 8px !important;
+          }
+          .mobile-grid-btn { width: 26px; height: 26px; }
+          .mobile-grid-btn svg { width: 13px; height: 13px; }
+        }
+      `}</style>
       <Footer />
     </>
   );

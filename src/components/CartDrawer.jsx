@@ -248,7 +248,7 @@ export default function CartDrawer() {
             onClick={handleCheckout}
             disabled={cartItems.length === 0 || checkoutLoading}
           >
-            {checkoutLoading ? 'Redirecting to Shopify...' : 'Book Entire Order'}
+            {checkoutLoading ? 'Redirecting to Shopify...' : 'Complete Purchase'}
           </button>
         </div>
       </div>

@@ -5146,6 +5146,46 @@ a {
   text-align: justify;
 }
 
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-dark);
+  margin-top: 35px;
+  margin-bottom: 20px;
+  break-after: avoid;
+}
+
+.article-content h2 {
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+}
+
+.article-content h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+}
+
+.article-content p {
+  margin-bottom: 30px;
+}
+
+.article-content ul,
+.article-content ol {
+  margin: 0 0 30px 24px;
+}
+
+.article-content li {
+  margin-bottom: 10px;
+}
+
+.article-content strong,
+.article-content b {
+  font-weight: 600;
+  color: #111;
+}
+
 .article-lead {
   font-size: 22px;
   line-height: 1.85;

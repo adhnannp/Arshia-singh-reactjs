@@ -80,6 +80,7 @@ export default function CategoryPage() {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);  // Layout & Filter States
   const [layoutMode] = useState('studio'); // 'studio' (3-col)
+  const [mobileGrid, setMobileGrid] = useState('1col'); // mobile: '1col' | '2col'
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedPrices, setSelectedPrices] = useState([]);
   const [selectedOccasions, setSelectedOccasions] = useState([]);
@@ -353,28 +354,65 @@ export default function CategoryPage() {
       {/* ─── DYNAMIC UTILITY CONTROLS BAR ─── */}
       <div className="collection-controls-bar">
         <div className="controls-top-row">
+
+          {/* LEFT: Filters button */}
           <button className="btn-filter-trigger" onClick={() => setIsFilterOpen(true)}>
             <span>Filters</span>
             {activeFiltersCount > 0 ? (
               <span className="filter-count">{activeFiltersCount}</span>
             ) : (
-              <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
                 <path d="M1 2.5H13M3.5 6H10.5M5.5 9.5H8.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
               </svg>
             )}
           </button>
 
-          <div className="sort-select-wrapper">
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="sort-select"
-            >
-              <option value="default">Sort: Featured</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="alphabetical">Alphabetical</option>
-            </select>
+          {/* RIGHT: grid toggle + sort grouped */}
+          <div className="controls-right">
+
+            {/* Mobile-only grid view toggle */}
+            <div className="mobile-grid-toggle">
+              <button
+                className={`mobile-grid-btn${mobileGrid === '1col' ? ' active' : ''}`}
+                onClick={() => setMobileGrid('1col')}
+                aria-label="Single column view"
+              >
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="2" width="12" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="2" y="9" width="12" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
+              </button>
+              <button
+                className={`mobile-grid-btn${mobileGrid === '2col' ? ' active' : ''}`}
+                onClick={() => setMobileGrid('2col')}
+                aria-label="Two column grid view"
+              >
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Thin separator — visible only when toggle is showing */}
+            <div className="controls-sep" />
+
+            {/* Sort — compact labels in the bar */}
+            <div className="sort-select-wrapper">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="sort-select"
+              >
+                <option value="default">Featured</option>
+                <option value="price-low">Price ↑</option>
+                <option value="price-high">Price ↓</option>
+                <option value="alphabetical">A – Z</option>
+              </select>
+            </div>
+
           </div>
         </div>
 
@@ -435,7 +473,7 @@ export default function CategoryPage() {
             <button className="btn-primary" onClick={clearAllFilters}>Reset Filters</button>
           </div>
         ) : (
-          <div className="collection-products-grid grid-studio">
+          <div className={`collection-products-grid grid-studio${mobileGrid === '2col' ? ' mobile-2col' : ''}`}>
             {displayProducts.map((product) => {
               const isWishlisted = isInWishlist(product.id);
               return (
@@ -631,6 +669,115 @@ export default function CategoryPage() {
         </div>
       </div>
 
+      <style>{`
+        /* ── Controls Bar ── */
+        .collection-controls-bar {
+          width: 100%;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+        .controls-top-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          width: 100%;
+          box-sizing: border-box;
+          flex-wrap: nowrap;
+          overflow: hidden;
+        }
+        .controls-right {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          flex-shrink: 0;
+        }
+        .controls-sep {
+          display: none;
+          width: 1px;
+          height: 18px;
+          background: #d4d4d4;
+          flex-shrink: 0;
+        }
+
+        /* ── Grid Toggle (hidden on desktop, shown on mobile) ── */
+        .mobile-grid-toggle {
+          display: none;
+          align-items: center;
+          gap: 3px;
+          flex-shrink: 0;
+        }
+        .mobile-grid-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border: 1px solid #d4d4d4;
+          background: transparent;
+          border-radius: 4px;
+          cursor: pointer;
+          color: #999;
+          transition: border-color 0.2s, color 0.2s, background 0.2s;
+          flex-shrink: 0;
+          padding: 0;
+        }
+        .mobile-grid-btn.active {
+          border-color: #1d1d1f;
+          color: #1d1d1f;
+          background: #f0f0f0;
+        }
+
+        /* ── Mobile breakpoint ── */
+        @media (max-width: 768px) {
+          .mobile-grid-toggle {
+            display: flex;
+          }
+          .controls-sep {
+            display: block;
+          }
+
+          /* 2-column grid */
+          .collection-products-grid.mobile-2col {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: clamp(6px, 2vw, 12px) !important;
+          }
+          .collection-products-grid.mobile-2col .product-card-name {
+            font-size: clamp(0.8rem, 3vw, 0.95rem);
+            line-height: 1.3;
+          }
+          .collection-products-grid.mobile-2col .product-card-price {
+            font-size: clamp(0.78rem, 2.8vw, 0.9rem);
+            font-weight: 600;
+          }
+          .collection-products-grid.mobile-2col .product-card-category {
+            font-size: clamp(0.52rem, 1.6vw, 0.6rem);
+            letter-spacing: 0.08em;
+            opacity: 0.55;
+          }
+        }
+
+        /* ── Very small screens (320px) ── */
+        @media (max-width: 380px) {
+          .btn-filter-trigger {
+            padding: 7px 10px !important;
+            font-size: 10px !important;
+            gap: 5px !important;
+          }
+          .sort-select {
+            font-size: 10px !important;
+            padding: 7px 20px 7px 8px !important;
+          }
+          .mobile-grid-btn {
+            width: 26px;
+            height: 26px;
+          }
+          .mobile-grid-btn svg {
+            width: 13px;
+            height: 13px;
+          }
+        }
+      `}</style>
       <Footer />
     </>
   );
