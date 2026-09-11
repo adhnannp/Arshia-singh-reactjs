@@ -94,7 +94,7 @@ export default function InquiriesClient() {
 
           {/* WhatsApp — Primary solid */}
           <a
-            href="https://wa.me/919953275142"
+            href="https://wa.me/+918329672516"
             target="_blank"
             rel="noopener noreferrer"
             onMouseEnter={() => setWaHover(true)}

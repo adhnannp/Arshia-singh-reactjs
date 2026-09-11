@@ -22,7 +22,9 @@ export default function AlterationExchangeRefundPolicyPage() {
               If the fit of your garment requires minor adjustments, we are happy to assist with alterations.
             </p>
             <p>
-              Customers must notify us within 14 days of delivery by emailing <a href="mailto:orders@arshiasinghofficial.com">orders@arshiasinghofficial.com</a> with their order number and details of the required alteration.
+              Customers must notify us within 14 days of delivery by emailing <a href="mailto:ordersarshiasingh@gmail.com
+">ordersarshiasingh@gmail.com
+</a> with their order number and details of the required alteration.
             </p>
             <p>To be eligible for alterations:</p>
             <ul style={{ listStyleType: 'none', paddingLeft: '15px', marginBottom: '25px' }}>

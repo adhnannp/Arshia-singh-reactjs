@@ -475,7 +475,7 @@ export default function ProductDetailPage() {
     const optionText = nonSizeSummary ? ` (${nonSizeSummary})` : '';
     const productUrl = typeof window !== 'undefined' ? window.location.href : '';
     const msg = `Hi! I'm interested in ${product.name}${optionText}\n(Size: ${selectedSize || 'TBD'}) - ${formatPrice(displayPrice)}.\nProduct link: ${productUrl}`;
-    window.open(`https://wa.me/919953275142?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/+918329672516?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   const handleScroll = (e) => {

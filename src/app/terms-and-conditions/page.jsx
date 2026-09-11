@@ -68,7 +68,7 @@ export default function TermsAndConditionsPage() {
             <h2>Contact Information</h2>
             <p>
               For any questions regarding these Terms & Conditions, please contact:<br />
-              Email: <a href="mailto:orders@arshiasinghofficial.com">orders@arshiasinghofficial.com</a><br />
+              Email: <a href="mailto:ordersarshiasingh@gmail.com">ordersarshiasingh@gmail.com</a><br />
               Phone: <a href="tel:+918329672516">+91 8329672516</a>
             </p>
           </div>
