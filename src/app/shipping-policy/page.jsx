@@ -83,7 +83,7 @@ export default function ShippingPolicyPage() {
             <h2>Contact Us</h2>
             <p>
               For any shipping-related queries, please contact:<br />
-              Email: <a href="mailto:orders@arshiasinghofficial.com">orders@arshiasinghofficial.com</a>
+              Email: <a href="mailto:ordersarshiasingh@gmail.com">ordersarshiasingh@gmail.com</a>
             </p>
             <p>
               <strong>Customer Support Hours:</strong><br />

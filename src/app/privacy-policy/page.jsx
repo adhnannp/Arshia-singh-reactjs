@@ -97,7 +97,7 @@ export default function PrivacyPolicyPage() {
             <h2>Contact Us</h2>
             <p>
               For any questions regarding this Privacy Policy, please contact:<br />
-              Email: <a href="mailto:orders@arshiasinghofficial.com">orders@arshiasinghofficial.com</a>
+              Email: <a href="mailto:ordersarshiasingh@gmail.com">ordersarshiasingh@gmail.com</a>
             </p>
           </div>
         </div>
